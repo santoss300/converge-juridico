@@ -26,7 +26,7 @@ export default function Hero() {
       {/* Hairline top border */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "var(--line-1)" }} />
 
-      <div className="container" style={{ padding: "160px 32px 96px", position: "relative" }}>
+      <div className="container hero-inner">
         <div style={{ maxWidth: "760px" }}>
           {/* Eyebrow */}
           <p className="eyebrow" style={{ marginBottom: "32px" }}>
@@ -76,6 +76,7 @@ export default function Hero() {
 
         {/* Decorative logo mark — large, faint, right side */}
         <div
+          className="hide-on-mobile"
           style={{
             position: "absolute",
             right: "64px",

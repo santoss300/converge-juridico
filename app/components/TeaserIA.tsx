@@ -75,14 +75,7 @@ export default function TeaserIA() {
         </div>
 
         {/* Agents grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: "20px",
-            marginBottom: "72px",
-          }}
-        >
+        <div className="responsive-grid-2-cards" style={{ marginBottom: "72px" }}>
           {agentes.map((a) => (
             <div
               key={a.title}

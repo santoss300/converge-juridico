@@ -53,6 +53,7 @@ export default function Navbar() {
         <nav style={{ display: "flex", alignItems: "center", gap: "32px" }}>
           <a
             href="#practicas"
+            className="hide-on-mobile"
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "14px",

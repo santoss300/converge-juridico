@@ -107,14 +107,7 @@ export default function Practicas() {
         </div>
 
         {/* Benefits grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: "20px",
-            marginBottom: "80px",
-          }}
-        >
+        <div className="responsive-grid-2-cards" style={{ marginBottom: "80px" }}>
           {beneficios.map((b) => (
             <div
               key={b.title}
@@ -146,16 +139,9 @@ export default function Practicas() {
         </div>
 
         {/* Form section */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "80px",
-            alignItems: "start",
-          }}
-        >
+        <div className="responsive-grid-2" style={{ alignItems: "start" }}>
           {/* Left: pitch */}
-          <div style={{ position: "sticky", top: "120px" }}>
+          <div className="sticky-desktop">
             <p className="eyebrow" style={{ marginBottom: "24px" }}>Postulate</p>
             <h2 className="display-2" style={{ marginBottom: "28px" }}>
               Empezá a construir tu experiencia.

@@ -4,14 +4,7 @@ export default function Perfil() {
   return (
     <section id="perfil" style={{ background: "var(--bg-1)", borderBottom: "1px solid var(--line-1)" }}>
       <div className="container section">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "80px",
-            alignItems: "center",
-          }}
-        >
+        <div className="responsive-grid-2" style={{ alignItems: "center" }}>
           {/* Portrait placeholder */}
           <div style={{ position: "relative" }}>
             <div

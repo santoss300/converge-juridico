@@ -49,7 +49,7 @@ export default function Contacto() {
   return (
     <section id="contacto" style={{ background: "var(--bg-1)" }}>
       <div className="container section">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
+        <div className="responsive-grid-2" style={{ alignItems: "start" }}>
 
           {/* Left: info */}
           <div>

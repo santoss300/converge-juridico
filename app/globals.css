@@ -242,3 +242,76 @@ body {
   margin: 0 auto;
   width: 100%;
 }
+
+/* ── Responsive utilities ───────────────────────────────────── */
+
+.hero-inner {
+  padding: 100px 24px 72px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .hero-inner {
+    padding: 160px 32px 96px;
+  }
+}
+
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .responsive-grid-2 {
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+}
+
+.responsive-grid-2-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .responsive-grid-2-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .responsive-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.sticky-desktop {
+  position: static;
+}
+
+@media (min-width: 768px) {
+  .sticky-desktop {
+    position: sticky;
+    top: 120px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
