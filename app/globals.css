@@ -315,3 +315,35 @@ body {
     display: none !important;
   }
 }
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 4px;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  flex-shrink: 0;
+  width: 82%;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 640px) {
+  .carousel-item {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-item {
+    width: calc(33.333% - 14px);
+  }
+}

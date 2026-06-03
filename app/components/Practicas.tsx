@@ -106,13 +106,13 @@ export default function Practicas() {
           </p>
         </div>
 
-        {/* Benefits grid */}
-        <div className="responsive-grid-2-cards" style={{ marginBottom: "80px" }}>
+        {/* Benefits carousel */}
+        <div className="carousel" style={{ marginBottom: "80px" }}>
           {beneficios.map((b) => (
             <div
               key={b.title}
-              className="card"
-              style={{ padding: "28px 28px", display: "flex", gap: "20px", alignItems: "flex-start" }}
+              className="card carousel-item"
+              style={{ padding: "28px", display: "flex", gap: "20px", alignItems: "flex-start" }}
             >
               <i
                 className={`ph-thin ${b.icon}`}
