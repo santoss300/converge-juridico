@@ -42,7 +42,7 @@ export default function Areas() {
           <h2 className="h1">Lo que hacemos, bien hecho.</h2>
         </div>
 
-        <div className="responsive-grid-3">
+        <div className="responsive-grid-3 areas-grid">
           {areas.map((area) => (
             <div key={area.title} className="card" style={{ padding: "36px 32px" }}>
               <i

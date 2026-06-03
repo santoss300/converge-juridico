@@ -347,3 +347,23 @@ body {
     width: calc(33.333% - 14px);
   }
 }
+
+/* Areas: grid en desktop, carrusel de 3 en mobile */
+@media (max-width: 767px) {
+  .areas-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 16px;
+  }
+  .areas-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .areas-grid > * {
+    flex-shrink: 0;
+    width: 31%;
+    scroll-snap-align: start;
+  }
+}
