@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
     },
     body: JSON.stringify({
       from: "Converge Web <onboarding@resend.dev>",
-      to: ["ignacioabogado22@gmail.com"],
+      to: ["neworld555@gmail.com"],
       subject: `Nueva consulta de ${escapeHtml(nombre)}`,
       html: `
         <h2>Nueva consulta desde convergejuridico.com.ar</h2>
