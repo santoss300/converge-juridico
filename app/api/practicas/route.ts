@@ -60,8 +60,8 @@ export async function POST(req: NextRequest) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "Converge Web <onboarding@resend.dev>",
-      to: ["neworld555@gmail.com"],
+      from: "Converge Web <noreply@convergejuridico.com>",
+      to: ["ignacioabogado22@gmail.com"],
       subject: `Nueva postulación de pasantía — ${escapeHtml(nombre)} ${escapeHtml(apellido)}`,
       html: `
         <h2>Nueva postulación de pasantía — convergejuridico.com.ar</h2>
