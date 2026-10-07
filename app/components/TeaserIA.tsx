@@ -1,153 +1,69 @@
-const agentes = [
+import Reveal from "./Reveal";
+
+/* 06 — EN DESARROLLO
+   Cierre. No compite con el CTA principal: su acción es distinta
+   (acceso anticipado), no "consultar". */
+
+const AGENTES = [
   {
-    icon: "ph-magnifying-glass",
-    title: "Agente de investigación",
-    desc: "Búsquedas en lenguaje natural sobre el Código Civil, Penal, Comercial, Laboral, resoluciones y jurisprudencia. Una herramienta de apoyo que reduce el tiempo de investigación sin reemplazar el criterio del profesional.",
+    folio: "a",
+    titulo: "Investigación",
+    desc: "Búsqueda en lenguaje natural sobre códigos, resoluciones y jurisprudencia. Devuelve la fuente, no una opinión.",
   },
   {
-    icon: "ph-file-text",
-    title: "Agente de análisis documental",
-    desc: "Asiste al abogado en la revisión de contratos, escrituras y expedientes, señalando cláusulas, plazos y puntos de atención. El análisis final y la estrategia siempre quedan en manos del profesional.",
+    folio: "b",
+    titulo: "Lectura de documentación",
+    desc: "Señala cláusulas, plazos y puntos de atención en contratos, escrituras y expedientes. El criterio sigue siendo del abogado.",
   },
   {
-    icon: "ph-pen-nib",
-    title: "Agente de redacción",
-    desc: "Sugiere estructuras y fundamentos normativos para demandas, contestaciones y escritos. Un punto de partida que el abogado adapta, corrige y firma con su criterio y experiencia.",
-  },
-  {
-    icon: "ph-clock-countdown",
-    title: "Disponible 24 horas",
-    desc: "Apoyo disponible en cualquier momento para consultas de investigación o revisión de documentos. Un complemento para el estudio, no un sustituto del profesional que conoce el caso.",
+    folio: "c",
+    titulo: "Borradores de escritos",
+    desc: "Propone estructura y fundamentos normativos. Lo que se presenta lo corrige y lo firma una persona.",
   },
 ];
 
 export default function TeaserIA() {
   return (
-    <section
-      style={{
-        background: "var(--bg-0)",
-        position: "relative",
-        overflow: "hidden",
-        borderTop: "1px solid var(--line-1)",
-      }}
-    >
-      {/* Large ambient glow */}
-      <div
-        style={{
-          position: "absolute",
-          top: "-20%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "900px",
-          height: "600px",
-          background: "radial-gradient(ellipse, rgba(197,162,88,0.07) 0%, transparent 65%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div className="container section" style={{ position: "relative" }}>
-
-        {/* Header */}
-        <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 72px" }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "24px" }}>
-            <i className="ph-thin ph-robot" style={{ fontSize: "22px", color: "var(--gold-400)" }} />
-            <p className="eyebrow">Tecnología · Próximamente</p>
-          </div>
-
-          <h2 className="display-2" style={{ marginBottom: "24px" }}>
-            Inteligencia artificial{" "}
-            <em className="display-em">al servicio</em>
-            <br />
-            del derecho argentino.
+    <section id="ia" className="section">
+      <div className="container">
+        <Reveal i={0} style={{ marginBottom: "var(--sp-6)" }}>
+          <p className="t-label" style={{ marginBottom: "var(--sp-4)" }}>
+            <span className="t-accent">06</span>
+            <span style={{ margin: "0 0.75em", opacity: 0.4 }}>—</span>
+            En desarrollo
+          </p>
+          <h2 className="t-h2" style={{ maxWidth: "24ch" }}>
+            Estamos construyendo una herramienta de IA para estudios jurídicos.
           </h2>
-
-          <span className="rule-gold" style={{ display: "block", margin: "0 auto 28px", width: "48px" }} />
-
-          <p className="lead" style={{ marginBottom: "12px" }}>
-            Converge está desarrollando el primer sistema de agentes de IA especializado
-            en legislación argentina. No es un chatbot genérico — son agentes entrenados
-            sobre los códigos, la jurisprudencia y la práctica procesal del país.
+          <hr className="rule-accent" style={{ margin: "var(--sp-5) 0" }} />
+          <p className="t-lead" style={{ maxWidth: "56ch" }}>
+            No firma, no decide y no reemplaza al abogado: le saca de encima las
+            horas que no requieren criterio.
           </p>
-          <p className="body-text" style={{ color: "var(--fg-3)" }}>
-            Pensado para estudios jurídicos que quieren investigar más rápido,
-            cometer menos errores y dedicar el tiempo a lo que realmente importa: sus clientes.
-          </p>
-        </div>
+        </Reveal>
 
-        {/* Agents grid */}
-        <div className="responsive-grid-2-cards" style={{ marginBottom: "72px" }}>
-          {agentes.map((a) => (
-            <div
-              key={a.title}
-              className="card card-gold"
-              style={{ padding: "32px", display: "flex", gap: "20px", alignItems: "flex-start" }}
-            >
-              <i
-                className={`ph-thin ${a.icon}`}
-                style={{ fontSize: "32px", color: "var(--gold-400)", flexShrink: 0, marginTop: "2px" }}
-              />
-              <div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontWeight: 600,
-                    fontSize: "16px",
-                    color: "var(--fg-1)",
-                    marginBottom: "10px",
-                  }}
-                >
-                  {a.title}
-                </h3>
-                <p className="body-text" style={{ fontSize: "15px", color: "var(--fg-2)", lineHeight: 1.65 }}>
-                  {a.desc}
-                </p>
-              </div>
-            </div>
+        <div className="ia-grid">
+          {AGENTES.map((a, n) => (
+            <Reveal key={a.folio} i={n + 1} className="ia-item">
+              <span className="t-folio t-accent">{a.folio}</span>
+              <h3
+                className="t-h3"
+                style={{ marginBlock: "var(--sp-2)", fontSize: "var(--step-lead)" }}
+              >
+                {a.titulo}
+              </h3>
+              <p className="t-sm" style={{ color: "var(--text-muted)" }}>
+                {a.desc}
+              </p>
+            </Reveal>
           ))}
         </div>
 
-        {/* CTA bottom */}
-        <div
-          style={{
-            textAlign: "center",
-            padding: "56px 48px",
-            border: "1px solid var(--line-gold)",
-            borderRadius: "var(--r-lg)",
-            background: "var(--bg-2)",
-            boxShadow: "var(--shadow-gold)",
-            maxWidth: "680px",
-            margin: "0 auto",
-          }}
-        >
-          <i className="ph-thin ph-brain" style={{ fontSize: "44px", color: "var(--gold-400)", display: "block", marginBottom: "20px" }} />
-          <h3 className="h2" style={{ marginBottom: "16px" }}>
-            Sumate a la lista de acceso anticipado.
-          </h3>
-          <p className="body-text" style={{ color: "var(--fg-3)", marginBottom: "32px", maxWidth: "480px", margin: "0 auto 32px" }}>
-            El sistema estará disponible para un grupo reducido de estudios antes del lanzamiento público.
-            Si querés ser de los primeros, dejanos tus datos.
-          </p>
-          <a
-            href="#contacto"
-            style={{
-              display: "inline-block",
-              fontFamily: "var(--font-body)",
-              fontSize: "14px",
-              fontWeight: 600,
-              color: "var(--fg-on-gold)",
-              background: "var(--gold-500)",
-              padding: "14px 36px",
-              borderRadius: "var(--r-pill)",
-              textDecoration: "none",
-              letterSpacing: "0.04em",
-              boxShadow: "var(--shadow-gold)",
-              transition: "background var(--dur-fast) var(--ease-soft)",
-            }}
-          >
+        <Reveal i={4} style={{ marginTop: "var(--sp-6)" }}>
+          <a href="#contacto" className="btn btn-ghost">
             Quiero acceso anticipado
           </a>
-        </div>
-
+        </Reveal>
       </div>
     </section>
   );

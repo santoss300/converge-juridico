@@ -1,97 +1,107 @@
-import Image from "next/image";
+import Reveal from "./Reveal";
+
+/* 01 — HERO
+   Composición editorial/rota: el titular no está centrado ni es un bloque.
+   Las tres líneas se escalonan como las entradas de un expediente. */
+
+const LINEAS = [
+  "Una sucesión que no avanza.",
+  "Una cuota que no llega.",
+  "Un pagaré que nadie paga.",
+];
 
 export default function Hero() {
   return (
     <section
       id="hero"
       style={{
-        minHeight: "100vh",
+        position: "relative",
+        minHeight: "100svh",
         display: "flex",
         alignItems: "center",
-        background: "var(--bg-0)",
-        position: "relative",
         overflow: "hidden",
+        isolation: "isolate",
       }}
     >
-      {/* Radial vignette */}
+      <div className="ambient" aria-hidden="true" />
+
+      {/* Grid visible — eje 8 de Editorial/Swiss */}
       <div
+        aria-hidden="true"
+        className="hide-mobile"
         style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(197,162,88,0.05) 0%, transparent 70%)",
+          zIndex: -1,
+          backgroundImage:
+            "repeating-linear-gradient(to right, var(--line-1) 0 1px, transparent 1px calc(100% / 12))",
+          backgroundSize: "100% 100%",
+          opacity: 0.6,
           pointerEvents: "none",
         }}
       />
 
-      {/* Hairline top border */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "var(--line-1)" }} />
-
-      <div className="container hero-inner">
-        <div style={{ maxWidth: "760px" }}>
-          {/* Eyebrow */}
-          <p className="eyebrow" style={{ marginBottom: "32px" }}>
-            Estudio Jurídico · Salta, Argentina
+      <div className="container" style={{ paddingBlock: "var(--sp-8)" }}>
+        <Reveal i={0}>
+          <p className="t-label" style={{ marginBottom: "var(--sp-5)" }}>
+            <span className="t-accent">01</span>
+            <span style={{ margin: "0 0.75em", opacity: 0.4 }}>—</span>
+            Salta · Argentina
           </p>
+        </Reveal>
 
-          {/* Headline */}
-          <h1 className="display-1" style={{ marginBottom: "32px" }}>
-            Soluciones jurídicas{" "}
-            <em className="display-em">claras</em>
-            <br />
-            para problemas reales.
-          </h1>
-
-          {/* Hairline */}
-          <span className="rule-gold" style={{ marginBottom: "32px" }} />
-
-          {/* Lead */}
-          <p className="lead" style={{ maxWidth: "520px", marginBottom: "48px", marginTop: "32px" }}>
-            Acompañamos a personas y familias en los momentos que más importan,
-            con criterio, compromiso y claridad en cada paso del proceso.
-          </p>
-
-          {/* CTAs */}
-          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "center" }}>
-            <a
-              href="#contacto"
-              style={{
-                display: "inline-block",
-                fontFamily: "var(--font-body)",
-                fontSize: "14px",
-                fontWeight: 500,
-                color: "var(--fg-on-gold)",
-                background: "var(--gold-500)",
-                padding: "14px 32px",
-                borderRadius: "var(--r-pill)",
-                textDecoration: "none",
-                letterSpacing: "0.03em",
-                transition: "background var(--dur-fast) var(--ease-soft), box-shadow var(--dur-fast) var(--ease-soft)",
-                boxShadow: "var(--shadow-gold)",
-              }}
+        <h1 className="t-h1" style={{ marginBottom: "var(--sp-4)" }}>
+          {LINEAS.map((linea, n) => (
+            <Reveal
+              as="span"
+              key={linea}
+              i={n + 1}
+              className="hero-linea"
+              style={
+                {
+                  display: "block",
+                  "--indent": `${n * 1.5}ch`,
+                } as React.CSSProperties
+              }
             >
-              Solicitar una consulta en nuestro estudio jurídico
-            </a>
-          </div>
-        </div>
+              {linea}
+            </Reveal>
+          ))}
+        </h1>
 
-        {/* Decorative logo mark — large, faint, right side */}
-        <div
-          className="hide-on-mobile"
+        <Reveal i={4}>
+          <hr className="rule-accent" style={{ margin: "var(--sp-5) 0" }} />
+        </Reveal>
+
+        <Reveal i={5}>
+          <p className="t-lead" style={{ maxWidth: "54ch" }}>
+            En la primera reunión te decimos tres cosas: si tenés caso, cuánto
+            cuesta y cuánto puede tardar. Nada más, y nada menos.
+          </p>
+        </Reveal>
+
+        <Reveal
+          i={6}
           style={{
-            position: "absolute",
-            right: "64px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            opacity: 0.04,
-            pointerEvents: "none",
+            display: "flex",
+            gap: "var(--sp-3)",
+            flexWrap: "wrap",
+            marginTop: "var(--sp-6)",
           }}
         >
-          <Image src="/logo-white.png" alt="" width={400} height={400} style={{ objectFit: "contain" }} />
-        </div>
+          <a href="#contacto" className="btn btn-primary">
+            Contanos tu caso
+          </a>
+          <a
+            href="https://wa.me/543874199487"
+            className="btn btn-ghost"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a>
+        </Reveal>
       </div>
-
-      {/* Bottom hairline */}
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "1px", background: "var(--line-1)" }} />
     </section>
   );
 }

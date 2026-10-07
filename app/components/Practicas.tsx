@@ -2,8 +2,13 @@
 
 import { useState } from "react";
 import Captcha from "./Captcha";
+import Reveal from "./Reveal";
 
-const ramas = [
+/* 05 — PRÁCTICAS
+   Secundario por anatomía: cede protagonismo al contacto.
+   Copy honesto (no es un puesto rentado) — dicho antes, no después. */
+
+const RAMAS = [
   "Derecho Civil",
   "Derecho de Familia",
   "Derecho Sucesorio",
@@ -14,39 +19,55 @@ const ramas = [
   "Otra",
 ];
 
-const beneficios = [
+const QUE_SE_HACE = [
   {
-    icon: "ph-file-text",
-    title: "Redacción de escritos reales",
+    folio: "01",
+    titulo: "Escritos que se presentan",
     desc: "Demandas, oficios y presentaciones que ingresan efectivamente ante los tribunales.",
   },
   {
-    icon: "ph-folder-open",
-    title: "Manejo de expedientes",
+    folio: "02",
+    titulo: "Expedientes vivos",
     desc: "Seguimiento de causas activas: cédulas, plazos, notificaciones y estado procesal.",
   },
   {
-    icon: "ph-users",
-    title: "Contacto con clientes",
-    desc: "Participación en entrevistas y comunicaciones bajo supervisión directa del estudio.",
-  },
-  {
-    icon: "ph-graduation-cap",
-    title: "Formación práctica real",
-    desc: "No simulaciones — trabajo sobre casos vivos con orientación profesional constante.",
+    folio: "03",
+    titulo: "Entrevistas con clientes",
+    desc: "Participación en reuniones y comunicaciones, siempre con supervisión directa.",
   },
 ];
 
+type Estado = "idle" | "enviando" | "ok" | "error" | "limite";
+
+const MENSAJES: Record<string, { texto: string; tono: "ok" | "mal" }> = {
+  ok: {
+    texto:
+      "Recibimos tu postulación. Si el perfil encaja te escribimos por mail o WhatsApp.",
+    tono: "ok",
+  },
+  error: {
+    texto:
+      "No pudimos enviar tu postulación. Escribinos por WhatsApp al 387 419-9487.",
+    tono: "mal",
+  },
+  limite: {
+    texto: "Ya recibimos tu postulación. No hace falta que la repitas.",
+    tono: "mal",
+  },
+};
+
+const VACIO = {
+  nombre: "",
+  apellido: "",
+  whatsapp: "",
+  correo: "",
+  rama: "",
+  experiencia: "",
+};
+
 export default function Practicas() {
-  const [form, setForm] = useState({
-    nombre: "",
-    apellido: "",
-    whatsapp: "",
-    correo: "",
-    rama: "",
-    experiencia: "",
-  });
-  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+  const [form, setForm] = useState(VACIO);
+  const [estado, setEstado] = useState<Estado>("idle");
   const [showCaptcha, setShowCaptcha] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -56,7 +77,7 @@ export default function Practicas() {
 
   const sendForm = async () => {
     setShowCaptcha(false);
-    setStatus("sending");
+    setEstado("enviando");
     try {
       const res = await fetch("/api/practicas", {
         method: "POST",
@@ -64,224 +85,198 @@ export default function Practicas() {
         body: JSON.stringify(form),
       });
       if (res.ok) {
-        setStatus("ok");
-        setForm({ nombre: "", apellido: "", whatsapp: "", correo: "", rama: "", experiencia: "" });
+        setEstado("ok");
+        setForm(VACIO);
+      } else if (res.status === 429) {
+        setEstado("limite");
       } else {
-        setStatus("error");
+        setEstado("error");
       }
     } catch {
-      setStatus("error");
+      setEstado("error");
     }
   };
 
+  const set = (k: keyof typeof VACIO) => (v: string) =>
+    setForm((f) => ({ ...f, [k]: v }));
 
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    background: "var(--bg-3)",
-    border: "1px solid var(--line-2)",
-    borderRadius: "var(--r-md)",
-    padding: "14px 16px",
-    fontFamily: "var(--font-body)",
-    fontSize: "15px",
-    color: "var(--fg-1)",
-    outline: "none",
-    transition: "border-color var(--dur-fast) var(--ease-soft)",
-  };
+  const aviso = MENSAJES[estado];
 
   return (
-    <section id="practicas" style={{ background: "var(--bg-0)", borderBottom: "1px solid var(--line-1)" }}>
-      <div className="container section">
-
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "72px", maxWidth: "680px", margin: "0 auto 72px" }}>
-          <p className="eyebrow" style={{ marginBottom: "20px" }}>Pasantías</p>
-          <h2 className="h1" style={{ marginBottom: "24px" }}>
-            Tu primer caso real te está esperando.
-          </h2>
-          <span className="rule-gold" style={{ display: "block", margin: "0 auto 28px", width: "48px" }} />
-          <p className="body-text" style={{ color: "var(--fg-2)" }}>
-            En Converge abrimos las puertas a estudiantes de derecho que quieran dejar atrás
-            la teoría y sumergirse en la práctica profesional real — con supervisión, criterio
-            y casos que importan.
+    <section id="practicas" className="section">
+      <div className="container">
+        <Reveal i={0} style={{ marginBottom: "var(--sp-6)" }}>
+          <p className="t-label" style={{ marginBottom: "var(--sp-4)" }}>
+            <span className="t-accent">05</span>
+            <span style={{ margin: "0 0.75em", opacity: 0.4 }}>—</span>
+            Prácticas
           </p>
-        </div>
+          <h2 className="t-h2" style={{ maxWidth: "22ch" }}>
+            Si estás estudiando derecho en Salta.
+          </h2>
+          <hr className="rule-accent" style={{ margin: "var(--sp-5) 0" }} />
+          <p className="t-lead" style={{ maxWidth: "58ch" }}>
+            No es un puesto rentado ni una promesa de trabajo, y preferimos
+            decirlo antes que después. Es entrar a un expediente real: leerlo,
+            seguirlo y ver cómo se decide cada paso.
+          </p>
+        </Reveal>
 
-        {/* Benefits carousel */}
-        <div className="carousel" style={{ marginBottom: "80px" }}>
-          {beneficios.map((b) => (
-            <div
-              key={b.title}
-              className="card carousel-item"
-              style={{ padding: "28px", display: "flex", gap: "20px", alignItems: "flex-start" }}
-            >
-              <i
-                className={`ph-thin ${b.icon}`}
-                style={{ fontSize: "28px", color: "var(--gold-400)", flexShrink: 0, marginTop: "2px" }}
-              />
-              <div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontWeight: 600,
-                    fontSize: "16px",
-                    color: "var(--fg-1)",
-                    marginBottom: "8px",
-                  }}
-                >
-                  {b.title}
-                </h3>
-                <p className="body-text" style={{ fontSize: "15px", color: "var(--fg-3)", lineHeight: 1.6 }}>
-                  {b.desc}
-                </p>
-              </div>
-            </div>
+        <div className="ia-grid" style={{ marginBottom: "var(--sp-7)" }}>
+          {QUE_SE_HACE.map((b, n) => (
+            <Reveal key={b.folio} i={n + 1} className="ia-item">
+              <span className="t-folio t-accent">{b.folio}</span>
+              <h3
+                className="t-h3"
+                style={{
+                  marginBlock: "var(--sp-2)",
+                  fontSize: "var(--step-lead)",
+                }}
+              >
+                {b.titulo}
+              </h3>
+              <p className="t-sm" style={{ color: "var(--text-muted)" }}>
+                {b.desc}
+              </p>
+            </Reveal>
           ))}
         </div>
 
-        {/* Form section */}
-        <div className="responsive-grid-2" style={{ alignItems: "start" }}>
-          {/* Left: pitch */}
-          <div className="sticky-desktop">
-            <p className="eyebrow" style={{ marginBottom: "24px" }}>Postulate</p>
-            <h2 className="display-2" style={{ marginBottom: "28px" }}>
-              Empezá a construir tu experiencia.
-            </h2>
-            <span className="rule-gold" style={{ display: "block", marginBottom: "28px" }} />
-            <p className="body-text" style={{ marginBottom: "20px", color: "var(--fg-2)" }}>
-              Completá el formulario y nos ponemos en contacto para coordinar una
-              entrevista. No hace falta experiencia previa — sí hace falta compromiso
-              y ganas de aprender haciendo.
-            </p>
-          </div>
-
-          {/* Right: form */}
-          <div>
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-                <div>
-                  <label className="meta" style={{ display: "block", marginBottom: "8px" }}>Nombre</label>
-                  <input
-                    style={inputStyle}
-                    type="text"
-                    required
-                    placeholder="Tu nombre"
-                    value={form.nombre}
-                    onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="meta" style={{ display: "block", marginBottom: "8px" }}>Apellido</label>
-                  <input
-                    style={inputStyle}
-                    type="text"
-                    required
-                    placeholder="Tu apellido"
-                    value={form.apellido}
-                    onChange={(e) => setForm({ ...form, apellido: e.target.value })}
-                  />
-                </div>
-              </div>
-
+        <Reveal i={4}>
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--sp-3)",
+              maxWidth: "640px",
+            }}
+          >
+            <div className="campo-par">
               <div>
-                <label className="meta" style={{ display: "block", marginBottom: "8px" }}>WhatsApp</label>
+                <label htmlFor="p-nombre" className="t-label campo-label">
+                  Nombre
+                </label>
                 <input
-                  style={inputStyle}
+                  id="p-nombre"
+                  className="field"
+                  type="text"
+                  required
+                  autoComplete="given-name"
+                  value={form.nombre}
+                  onChange={(e) => set("nombre")(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="p-apellido" className="t-label campo-label">
+                  Apellido
+                </label>
+                <input
+                  id="p-apellido"
+                  className="field"
+                  type="text"
+                  required
+                  autoComplete="family-name"
+                  value={form.apellido}
+                  onChange={(e) => set("apellido")(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="campo-par">
+              <div>
+                <label htmlFor="p-wa" className="t-label campo-label">
+                  WhatsApp
+                </label>
+                <input
+                  id="p-wa"
+                  className="field"
                   type="tel"
                   required
-                  placeholder="+54 9 387 000-0000"
+                  autoComplete="tel"
                   value={form.whatsapp}
-                  onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+                  onChange={(e) => set("whatsapp")(e.target.value)}
                 />
               </div>
-
               <div>
-                <label className="meta" style={{ display: "block", marginBottom: "8px" }}>Correo electrónico</label>
+                <label htmlFor="p-mail" className="t-label campo-label">
+                  Correo
+                </label>
                 <input
-                  style={inputStyle}
+                  id="p-mail"
+                  className="field"
                   type="email"
                   required
-                  placeholder="tu@correo.com"
+                  autoComplete="email"
                   value={form.correo}
-                  onChange={(e) => setForm({ ...form, correo: e.target.value })}
+                  onChange={(e) => set("correo")(e.target.value)}
                 />
               </div>
+            </div>
 
-              <div>
-                <label className="meta" style={{ display: "block", marginBottom: "8px" }}>
-                  Rama del derecho que te interesa
-                </label>
-                <select
-                  style={{ ...inputStyle, appearance: "none", cursor: "pointer" }}
-                  required
-                  value={form.rama}
-                  onChange={(e) => setForm({ ...form, rama: e.target.value })}
-                >
-                  <option value="" disabled>Seleccioná una rama...</option>
-                  {ramas.map((r) => (
-                    <option key={r} value={r} style={{ background: "var(--bg-3)" }}>{r}</option>
-                  ))}
-                </select>
-              </div>
+            <div>
+              <label htmlFor="p-rama" className="t-label campo-label">
+                Rama que te interesa
+              </label>
+              <select
+                id="p-rama"
+                className="field"
+                required
+                value={form.rama}
+                onChange={(e) => set("rama")(e.target.value)}
+              >
+                <option value="">Elegí una</option>
+                {RAMAS.map((r) => (
+                  <option key={r} value={r}>
+                    {r}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-              <div>
-                <label className="meta" style={{ display: "block", marginBottom: "8px" }}>
-                  Experiencia previa{" "}
-                  <span style={{ color: "var(--fg-4)", fontFamily: "var(--font-body)", fontSize: "12px", textTransform: "none", letterSpacing: 0 }}>
-                    (opcional)
-                  </span>
-                </label>
-                <textarea
-                  style={{ ...inputStyle, minHeight: "120px", resize: "vertical" }}
-                  placeholder="Contanos si hiciste alguna pasantía, trabajaste en un estudio, o tenés alguna experiencia relacionada con el derecho..."
-                  value={form.experiencia}
-                  onChange={(e) => setForm({ ...form, experiencia: e.target.value })}
-                />
-              </div>
+            <div>
+              <label htmlFor="p-exp" className="t-label campo-label">
+                En qué año estás y qué te interesa
+              </label>
+              <textarea
+                id="p-exp"
+                className="field"
+                required
+                placeholder="Contanos en qué año de la carrera estás y por qué te interesa esta rama."
+                value={form.experiencia}
+                onChange={(e) => set("experiencia")(e.target.value)}
+                style={{ minHeight: "120px", resize: "vertical" }}
+              />
+            </div>
 
-              {!showCaptcha && (
-                <button
-                  type="submit"
-                  disabled={status === "sending"}
-                  style={{
-                    width: "100%",
-                    padding: "16px",
-                    background: status === "sending" ? "var(--gold-700)" : "var(--gold-500)",
-                    color: "var(--fg-on-gold)",
-                    fontFamily: "var(--font-body)",
-                    fontWeight: 600,
-                    fontSize: "15px",
-                    border: "none",
-                    borderRadius: "var(--r-md)",
-                    cursor: status === "sending" ? "not-allowed" : "pointer",
-                    letterSpacing: "0.03em",
-                    transition: "background var(--dur-fast) var(--ease-soft), box-shadow var(--dur-fast) var(--ease-soft)",
-                    boxShadow: status !== "sending" ? "var(--shadow-gold)" : "none",
-                  }}
-                >
-                  {status === "sending" ? "Enviando..." : "Enviar postulación"}
-                </button>
+            {!showCaptcha && (
+              <button
+                type="submit"
+                className="btn btn-ghost"
+                disabled={estado === "enviando"}
+                aria-busy={estado === "enviando"}
+                style={{ justifyContent: "center" }}
+              >
+                {estado === "enviando" ? "Enviando…" : "Postularme"}
+              </button>
+            )}
+
+            {showCaptcha && (
+              <Captcha
+                onConfirm={sendForm}
+                onCancel={() => setShowCaptcha(false)}
+              />
+            )}
+
+            <p role="status" aria-live="polite" className="aviso-wrap">
+              {aviso && (
+                <span className="t-sm aviso" data-tono={aviso.tono}>
+                  {aviso.texto}
+                </span>
               )}
-
-              {showCaptcha && (
-                <Captcha
-                  onConfirm={sendForm}
-                  onCancel={() => setShowCaptcha(false)}
-                />
-              )}
-
-              {status === "ok" && (
-                <p style={{ color: "var(--success)", fontFamily: "var(--font-body)", fontSize: "14px", textAlign: "center" }}>
-                  ¡Recibimos tu postulación! Te contactamos a la brevedad.
-                </p>
-              )}
-              {status === "error" && (
-                <p style={{ color: "var(--danger)", fontFamily: "var(--font-body)", fontSize: "14px", textAlign: "center" }}>
-                  Hubo un error. Escribinos directamente al WhatsApp.
-                </p>
-              )}
-            </form>
-          </div>
-        </div>
+            </p>
+          </form>
+        </Reveal>
       </div>
     </section>
   );

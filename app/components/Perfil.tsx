@@ -1,115 +1,66 @@
 import Image from "next/image";
+import Reveal from "./Reveal";
+
+/* 02 — PERFIL
+   La foto es el activo de confianza principal de un estudio unipersonal:
+   se queda, y se trata como una lámina de expediente — borde de 1px,
+   sin radio, sin sombra. */
 
 export default function Perfil() {
   return (
-    <section id="perfil" style={{ background: "var(--bg-1)", borderBottom: "1px solid var(--line-1)" }}>
-      <div className="container section">
-        <div className="responsive-grid-2" style={{ alignItems: "center" }}>
-          {/* Portrait placeholder */}
-          <div style={{ position: "relative" }}>
-            <div
-              style={{
-                width: "100%",
-                aspectRatio: "3/4",
-                maxWidth: "420px",
-                background: "var(--bg-2)",
-                borderRadius: "var(--r-lg)",
-                border: "1px solid var(--line-2)",
-                boxShadow: "var(--shadow-md)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "16px",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
+    <section id="perfil" className="section" style={{ background: "var(--bg-1)" }}>
+      <div className="container">
+        <Reveal i={0} style={{ marginBottom: "var(--sp-6)" }}>
+          <p className="t-label">
+            <span className="t-accent">02</span>
+            <span style={{ margin: "0 0.75em", opacity: 0.4 }}>—</span>
+            Quién te atiende
+          </p>
+        </Reveal>
+
+        <div className="perfil-grid">
+          <Reveal i={1}>
+            <figure className="perfil-foto">
               <Image
                 src="/foto-ignacio.jpg"
-                alt="Ignacio Facundo Ruiz — Abogado"
+                alt="Ignacio Facundo Ruíz, abogado del Estudio Jurídico Converge"
                 fill
+                sizes="(max-width: 900px) 100vw, 40vw"
                 style={{ objectFit: "cover", objectPosition: "center top" }}
+                priority
               />
+              {/* Degradé que tapa el logo impreso en la esquina de la foto */}
+              <span className="perfil-fade" aria-hidden="true" />
+            </figure>
+          </Reveal>
 
-              {/* Fade bottom */}
-              <div style={{
-                position: "absolute",
-                bottom: 0, left: 0, right: 0,
-                height: "28%",
-                background: "linear-gradient(to top, var(--bg-1) 0%, transparent 100%)",
-                pointerEvents: "none",
-              }} />
-              {/* Fade esquina inferior derecha — tapa logo */}
-              <div style={{
-                position: "absolute",
-                bottom: 0, right: 0,
-                width: "55%",
-                height: "22%",
-                background: "linear-gradient(to top left, var(--bg-1) 30%, transparent 75%)",
-                pointerEvents: "none",
-              }} />
-            </div>
-            {/* Gold accent line */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: "-1px",
-                left: "0",
-                width: "80px",
-                height: "3px",
-                background: "var(--gold-500)",
-                borderRadius: "var(--r-pill)",
-              }}
-            />
-          </div>
+          <Reveal i={2}>
+            <h2 className="t-h2">Ignacio Facundo Ruíz</h2>
 
-          {/* Bio */}
-          <div>
-            <p className="eyebrow" style={{ marginBottom: "24px" }}>
-              El estudio
-            </p>
-            <h2 className="display-2" style={{ marginBottom: "24px", textAlign: "center" }}>
-              Ignacio Facundo<br />Ruíz
-            </h2>
-            <span className="rule-gold" style={{ marginBottom: "28px", display: "block" }} />
-
-            <p className="meta" style={{ marginBottom: "24px", color: "var(--gold-400)" }}>
-              Abogado · Matrícula profesional
-            </p>
-
-            <p className="body-text" style={{ marginBottom: "24px" }}>
-              En Converge, cada caso se aborda con la atención que merece.
-              El compromiso con el cliente no termina en la firma de un documento
-              — acompaña cada etapa del proceso hasta su resolución.
-            </p>
-
-            <p className="body-text" style={{ marginBottom: "40px" }}>
-              Con enfoque en el derecho de familia, sucesiones y cobros,
-              el estudio trabaja con claridad y cercanía, sin tecnicismos
-              innecesarios. Porque entender lo que está pasando es parte
-              del servicio.
-            </p>
-
-            <a
-              href="#contacto"
-              style={{
-                display: "inline-block",
-                fontFamily: "var(--font-body)",
-                fontSize: "14px",
-                fontWeight: 500,
-                color: "var(--gold-400)",
-                border: "1px solid var(--line-gold)",
-                padding: "12px 28px",
-                borderRadius: "var(--r-pill)",
-                textDecoration: "none",
-                letterSpacing: "0.03em",
-                transition: "all var(--dur-fast) var(--ease-soft)",
-              }}
+            <p
+              className="t-label"
+              style={{ marginTop: "var(--sp-2)", color: "var(--accent)" }}
             >
-              Iniciar una consulta
+              Abogado · Salta
+            </p>
+
+            <hr className="rule-accent" style={{ margin: "var(--sp-5) 0" }} />
+
+            <p className="t-body" style={{ marginBottom: "var(--sp-4)" }}>
+              Somos un estudio chico, y lo decimos de frente: tu expediente no es
+              el número doscientos de una pila. Cuando mandás un mensaje te
+              responde el abogado que lo lleva, no una secretaria que toma nota.
+            </p>
+
+            <p className="t-body" style={{ marginBottom: "var(--sp-6)" }}>
+              Trabajamos con una regla: si no podés explicarle a otro en qué
+              estado está tu juicio, no te lo explicamos bien.
+            </p>
+
+            <a href="#contacto" className="btn btn-ghost">
+              Contanos tu caso
             </a>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

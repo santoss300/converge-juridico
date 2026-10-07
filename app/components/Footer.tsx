@@ -3,31 +3,65 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <footer
-      style={{
-        background: "var(--bg-0)",
-        borderTop: "1px solid var(--line-1)",
-        padding: "48px 32px",
-      }}
+      id="footer"
+      className="section"
+      style={{ paddingBlock: "var(--sp-6)" }}
     >
-      <div
-        className="container"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "24px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Image src="/logo-gold.png" alt="Converge" width={28} height={28} style={{ objectFit: "contain", opacity: 0.7 }} />
-          <span className="meta" style={{ color: "var(--fg-4)" }}>
-            Estudio Jurídico Converge · Salta, Argentina - Hecha por <span style={{ textTransform: "none" }}>neworld555@gmail.com</span>
-          </span>
-        </div>
-        <p className="small" style={{ color: "var(--fg-4)" }}>
-          © {new Date().getFullYear()} Todos los derechos reservados.
+      <div className="container">
+        <p className="t-label" style={{ marginBottom: "var(--sp-5)" }}>
+          <span className="t-accent">07</span>
+          <span style={{ margin: "0 0.75em", opacity: 0.4 }}>—</span>
+          Estudio
         </p>
+
+        <div className="footer-grid">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--sp-2)",
+            }}
+          >
+            <Image
+              src="/logo-white.png"
+              alt=""
+              width={26}
+              height={26}
+              style={{ objectFit: "contain", opacity: 0.6 }}
+            />
+            <span className="t-label" style={{ color: "var(--text-muted)" }}>
+              Converge
+            </span>
+          </div>
+
+          <div>
+            <p className="t-sm">Estudio Jurídico Converge</p>
+            <p className="t-sm">Salta, Argentina</p>
+          </div>
+
+          <div>
+            <a
+              href="https://wa.me/543874199487"
+              className="t-sm nav-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp · 387 419-9487
+            </a>
+          </div>
+
+          <div>
+            <p className="t-sm">
+              © {new Date().getFullYear()} · Todos los derechos reservados.
+            </p>
+            <p className="t-sm">
+              Hecha por{" "}
+              <a href="mailto:neworld555@gmail.com" className="nav-link">
+                neworld555@gmail.com
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -2,10 +2,36 @@
 
 import { useState } from "react";
 import Captcha from "./Captcha";
+import Reveal from "./Reveal";
+
+/* 04 — CONTACTO
+   Estados de UI (Etapa 3): enviando · éxito · error del usuario ·
+   error del sistema · rate limit. Ninguno termina en callejón:
+   todos ofrecen WhatsApp como salida. */
+
+type Estado = "idle" | "enviando" | "ok" | "error" | "limite";
+
+const MENSAJES: Record<string, { texto: string; tono: "ok" | "mal" }> = {
+  ok: {
+    texto:
+      "Listo. Te respondemos dentro de las próximas 24 a 48 horas hábiles. Si es urgente, escribinos por WhatsApp.",
+    tono: "ok",
+  },
+  error: {
+    texto:
+      "No pudimos enviar tu consulta. Escribinos por WhatsApp al 387 419-9487 y lo resolvemos por ahí.",
+    tono: "mal",
+  },
+  limite: {
+    texto:
+      "Ya recibimos tu consulta. Si necesitás agregar algo, mandanos un WhatsApp.",
+    tono: "mal",
+  },
+};
 
 export default function Contacto() {
   const [form, setForm] = useState({ nombre: "", telefono: "", mensaje: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+  const [estado, setEstado] = useState<Estado>("idle");
   const [showCaptcha, setShowCaptcha] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -15,7 +41,7 @@ export default function Contacto() {
 
   const sendForm = async () => {
     setShowCaptcha(false);
-    setStatus("sending");
+    setEstado("enviando");
     try {
       const res = await fetch("/api/contacto", {
         method: "POST",
@@ -23,102 +49,112 @@ export default function Contacto() {
         body: JSON.stringify(form),
       });
       if (res.ok) {
-        setStatus("ok");
+        setEstado("ok");
         setForm({ nombre: "", telefono: "", mensaje: "" });
+      } else if (res.status === 429) {
+        setEstado("limite");
       } else {
-        setStatus("error");
+        setEstado("error");
       }
     } catch {
-      setStatus("error");
+      setEstado("error");
     }
   };
 
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    background: "var(--bg-3)",
-    border: "1px solid var(--line-2)",
-    borderRadius: "var(--r-md)",
-    padding: "14px 16px",
-    fontFamily: "var(--font-body)",
-    fontSize: "15px",
-    color: "var(--fg-1)",
-    outline: "none",
-    transition: "border-color var(--dur-fast) var(--ease-soft)",
-  };
+  const aviso = MENSAJES[estado];
 
   return (
-    <section id="contacto" style={{ background: "var(--bg-1)" }}>
-      <div className="container section">
-        <div className="responsive-grid-2" style={{ alignItems: "start" }}>
+    <section id="contacto" className="section" style={{ background: "var(--bg-1)" }}>
+      <div className="container">
+        <Reveal i={0} style={{ marginBottom: "var(--sp-6)" }}>
+          <p className="t-label">
+            <span className="t-accent">04</span>
+            <span style={{ margin: "0 0.75em", opacity: 0.4 }}>—</span>
+            Contacto
+          </p>
+        </Reveal>
 
-          {/* Left: info */}
-          <div>
-            <p className="eyebrow" style={{ marginBottom: "24px" }}>Contacto</p>
-            <h2 className="display-2" style={{ marginBottom: "24px" }}>
-              Hablemos de tu caso.
-            </h2>
-            <span className="rule-gold" style={{ display: "block", marginBottom: "28px" }} />
-            <p className="body-text" style={{ marginBottom: "0" }}>
-              Contanos tu situación lo más detalladamente posible y nos ponemos en contacto a la brevedad. Honorarios reducidos con facilidades de pago.
+        <div className="grid-2" style={{ alignItems: "start" }}>
+          <Reveal i={1}>
+            <h2 className="t-h2">Contanos qué pasó.</h2>
+            <hr className="rule-accent" style={{ margin: "var(--sp-5) 0" }} />
+            <p className="t-body" style={{ maxWidth: "48ch" }}>
+              Escribí lo que puedas con tus palabras. Si falta algún dato lo
+              preguntamos nosotros — no hace falta que sepas cómo se llama tu
+              problema para poder consultarlo.
             </p>
-          </div>
+          </Reveal>
 
-          {/* Right: form */}
-          <div>
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          <Reveal i={2}>
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "var(--sp-3)",
+              }}
+            >
               <div>
-                <label className="meta" style={{ display: "block", marginBottom: "8px" }}>Nombre completo</label>
+                <label htmlFor="c-nombre" className="t-label campo-label">
+                  Nombre completo
+                </label>
                 <input
-                  style={inputStyle}
+                  id="c-nombre"
+                  className="field"
                   type="text"
                   required
+                  autoComplete="name"
                   placeholder="Tu nombre"
                   value={form.nombre}
                   onChange={(e) => setForm({ ...form, nombre: e.target.value })}
                 />
               </div>
+
               <div>
-                <label className="meta" style={{ display: "block", marginBottom: "8px" }}>Teléfono</label>
+                <label htmlFor="c-tel" className="t-label campo-label">
+                  Teléfono
+                </label>
                 <input
-                  style={inputStyle}
+                  id="c-tel"
+                  className="field"
                   type="tel"
-                  placeholder="Tu número de contacto"
+                  autoComplete="tel"
+                  placeholder="Para poder llamarte"
                   value={form.telefono}
-                  onChange={(e) => setForm({ ...form, telefono: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, telefono: e.target.value })
+                  }
                 />
               </div>
+
               <div>
-                <label className="meta" style={{ display: "block", marginBottom: "8px" }}>Consulta</label>
+                <label htmlFor="c-msg" className="t-label campo-label">
+                  Tu consulta
+                </label>
                 <textarea
-                  style={{ ...inputStyle, minHeight: "140px", resize: "vertical" }}
+                  id="c-msg"
+                  className="field"
                   required
-                  placeholder="Describí brevemente tu caso..."
+                  placeholder="Qué pasó, desde cuándo y qué necesitás resolver."
                   value={form.mensaje}
-                  onChange={(e) => setForm({ ...form, mensaje: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, mensaje: e.target.value })
+                  }
+                  style={{ minHeight: "150px", resize: "vertical" }}
                 />
               </div>
 
               {!showCaptcha && (
                 <button
                   type="submit"
-                  disabled={status === "sending"}
-                  style={{
-                    width: "100%",
-                    padding: "16px",
-                    background: status === "sending" ? "var(--gold-700)" : "var(--gold-500)",
-                    color: "var(--fg-on-gold)",
-                    fontFamily: "var(--font-body)",
-                    fontWeight: 600,
-                    fontSize: "15px",
-                    border: "none",
-                    borderRadius: "var(--r-md)",
-                    cursor: status === "sending" ? "not-allowed" : "pointer",
-                    letterSpacing: "0.03em",
-                    transition: "background var(--dur-fast) var(--ease-soft), box-shadow var(--dur-fast) var(--ease-soft)",
-                    boxShadow: status !== "sending" ? "var(--shadow-gold)" : "none",
-                  }}
+                  className="btn btn-primary"
+                  disabled={estado === "enviando"}
+                  aria-busy={estado === "enviando"}
+                  style={{ justifyContent: "center" }}
                 >
-                  {status === "sending" ? "Enviando..." : "Enviar consulta"}
+                  {estado === "enviando"
+                    ? "Enviando tu consulta…"
+                    : "Enviar consulta"}
                 </button>
               )}
 
@@ -129,18 +165,19 @@ export default function Contacto() {
                 />
               )}
 
-              {status === "ok" && (
-                <p style={{ color: "var(--success)", fontFamily: "var(--font-body)", fontSize: "14px", textAlign: "center" }}>
-                  Consulta enviada. Nos comunicamos a la brevedad.
-                </p>
-              )}
-              {status === "error" && (
-                <p style={{ color: "var(--danger)", fontFamily: "var(--font-body)", fontSize: "14px", textAlign: "center" }}>
-                  Hubo un error. Podés escribirnos directamente al WhatsApp.
-                </p>
-              )}
+              {/* Los estados se anuncian al lector de pantalla */}
+              <p role="status" aria-live="polite" className="aviso-wrap">
+                {aviso && (
+                  <span
+                    className="t-sm aviso"
+                    data-tono={aviso.tono}
+                  >
+                    {aviso.texto}
+                  </span>
+                )}
+              </p>
             </form>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

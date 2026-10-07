@@ -1,77 +1,90 @@
-const areas = [
+import Reveal from "./Reveal";
+
+/* 03 — ÁREAS
+   Sin cards. Sin cajas. Sin sombras.
+   Un índice foliado separado por reglas de 1px: la gramática del expediente.
+   Cada línea nombra LA SITUACIÓN, no la doctrina — el que llega se reconoce. */
+
+const AREAS = [
   {
-    icon: "ph-scroll",
-    title: "Derecho Sucesorio",
-    desc: "Acompañamos el proceso de herencias y sucesiones con claridad y respeto por los tiempos de cada familia.",
+    folio: "01",
+    titulo: "Sucesiones",
+    linea:
+      "Murió un familiar y quedó una casa, un auto o una cuenta a su nombre. Declaratoria de herederos, partición e inscripción.",
   },
   {
-    icon: "ph-gavel",
-    title: "Proceso Ejecutivo",
-    desc: "Iniciamos y gestionamos procesos ejecutivos para la protección efectiva de derechos patrimoniales.",
+    folio: "02",
+    titulo: "Juicio ejecutivo",
+    linea:
+      "Tenés un documento que ya prueba la deuda. Acá no se discute si te deben: se cobra.",
   },
   {
-    icon: "ph-hand-coins",
-    title: "Cobro de Deudas",
-    desc: "Recuperación judicial y extrajudicial de acreencias, con estrategia y seguimiento en cada etapa.",
+    folio: "03",
+    titulo: "Cobro de deudas",
+    linea:
+      "Te deben y dejaron de atenderte el teléfono. Primero se intenta el acuerdo; si no, se demanda.",
   },
   {
-    icon: "ph-note",
-    title: "Cobro de Pagarés",
-    desc: "Ejecución de títulos valores. Defendemos su crédito con los instrumentos que la ley provee.",
+    folio: "04",
+    titulo: "Pagarés",
+    linea:
+      "Firmaron un pagaré y venció. Es el título más rápido de ejecutar que hay en el código.",
   },
   {
-    icon: "ph-baby",
-    title: "Alimentos",
-    desc: "Fijación, modificación y ejecución de cuotas alimentarias. Los derechos de los menores, primero.",
+    folio: "05",
+    titulo: "Alimentos",
+    linea:
+      "La cuota no llega, llega tarde o no alcanza. Se puede fijar, aumentar y ejecutar lo que ya se adeuda.",
   },
   {
-    icon: "ph-house-line",
-    title: "Divorcios",
-    desc: "Separaciones con o sin acuerdo, con un enfoque que prioriza el bienestar de toda la familia.",
+    folio: "06",
+    titulo: "Divorcios",
+    linea:
+      "Con acuerdo se resuelve en meses. Sin acuerdo también se resuelve, pero conviene saber de antemano en qué te estás metiendo.",
   },
 ];
 
 export default function Areas() {
   return (
-    <section id="areas" style={{ background: "var(--bg-0)", borderBottom: "1px solid var(--line-1)" }}>
-      <div className="container section">
-        <div style={{ textAlign: "center", marginBottom: "72px" }}>
-          <p className="eyebrow" style={{ marginBottom: "20px" }}>
+    <section id="areas" className="section">
+      <div className="container">
+        <Reveal i={0} style={{ marginBottom: "var(--sp-6)" }}>
+          <p className="t-label" style={{ marginBottom: "var(--sp-3)" }}>
+            <span className="t-accent">03</span>
+            <span style={{ margin: "0 0.75em", opacity: 0.4 }}>—</span>
             Áreas de práctica
           </p>
-          <h2 className="h1">Lo que hacemos, bien hecho.</h2>
-        </div>
+          <h2 className="t-h2" style={{ maxWidth: "20ch" }}>
+            Buscá la tuya.
+          </h2>
+        </Reveal>
 
-        <div className="areas-grid">
-          {areas.map((area) => (
-            <div key={area.title} className="card" style={{ padding: "36px 32px" }}>
-              <i
-                className={`ph-thin ${area.icon}`}
-                style={{
-                  fontSize: "36px",
-                  color: "var(--gold-400)",
-                  display: "block",
-                  marginBottom: "20px",
-                }}
-              />
-              <h3
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 600,
-                  fontSize: "20px",
-                  color: "var(--fg-1)",
-                  marginBottom: "12px",
-                  lineHeight: 1.2,
-                }}
-              >
-                {area.title}
-              </h3>
-              <p className="body-text" style={{ fontSize: "15px", color: "var(--fg-3)" }}>
-                {area.desc}
-              </p>
-            </div>
+        <ul style={{ listStyle: "none" }}>
+          {AREAS.map((a, n) => (
+            <Reveal as="li" key={a.folio} i={n}>
+              <a href="#contacto" className="area-row">
+                <span className="t-folio area-folio">{a.folio}</span>
+                <span className="t-h3 area-titulo">{a.titulo}</span>
+                <span className="t-body area-linea">{a.linea}</span>
+                <svg
+                  className="area-flecha"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M4 10h12M11 5l5 5-5 5"
+                    stroke="currentColor"
+                    strokeWidth="1.25"
+                    strokeLinecap="square"
+                  />
+                </svg>
+              </a>
+            </Reveal>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
