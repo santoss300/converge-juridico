@@ -85,7 +85,7 @@ Un rail vertical fijo sobre el margen izquierdo con las secciones numeradas `01 
 |---|---|---|
 | 01 | Hero | Titular + **un** CTA legible sobre el fold |
 | 02 | Perfil | La foto y el nombre — activo de confianza principal de un estudio unipersonal |
-| 03 | Converge IA | Visible temprano (postulación a Claude Startups, 2026-10-07). Sin competir con el CTA principal: su acción es acceso anticipado por mail |
+| 03 | Converge IA | Visible temprano. Sin competir con el CTA principal: su acción es acceso anticipado por mail |
 | 04 | Áreas (6) | Los 6 nombres tienen que ser **escaneables**: el usuario busca el suyo |
 | 05 | Contacto | El formulario funciona siempre |
 | 06 | Prácticas | Secundario, puede ceder protagonismo |
@@ -404,7 +404,7 @@ No firma ni decide: el criterio y la firma son siempre del abogado.
 [ Quiero acceso anticipado ]  → mailto:contacto@convergejuridico.com
 ```
 
-> **Regla:** coherente con la solicitud a Claude Startups. Nada de "entrenado",
+> **Regla:** solo lo que el producto hace hoy. Nada de "entrenado",
 > "el primero", ni métricas. Es RAG sobre biblioteca propia. Sin logos de
 > Anthropic/Claude: solo el texto "sobre Claude".
 > Puentes: línea `03 — Converge IA →` bajo los CTA del Hero, e ítem en el Navbar.
