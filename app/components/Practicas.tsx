@@ -4,7 +4,7 @@ import { useState } from "react";
 import Captcha from "./Captcha";
 import Reveal from "./Reveal";
 
-/* 05 — PRÁCTICAS
+/* 06 — PRÁCTICAS
    Secundario por anatomía: cede protagonismo al contacto.
    Copy honesto (no es un puesto rentado) — dicho antes, no después. */
 
@@ -107,7 +107,7 @@ export default function Practicas() {
       <div className="container">
         <Reveal i={0} style={{ marginBottom: "var(--sp-6)" }}>
           <p className="t-label" style={{ marginBottom: "var(--sp-4)" }}>
-            <span className="t-accent">05</span>
+            <span className="t-accent">06</span>
             <span style={{ margin: "0 0.75em", opacity: 0.4 }}>—</span>
             Prácticas
           </p>

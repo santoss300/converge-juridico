@@ -1,6 +1,6 @@
 import Reveal from "./Reveal";
 
-/* 03 — ÁREAS
+/* 04 — ÁREAS
    Sin cards. Sin cajas. Sin sombras.
    Un índice foliado separado por reglas de 1px: la gramática del expediente.
    Cada línea nombra LA SITUACIÓN, no la doctrina — el que llega se reconoce. */
@@ -50,7 +50,7 @@ export default function Areas() {
       <div className="container">
         <Reveal i={0} style={{ marginBottom: "var(--sp-6)" }}>
           <p className="t-label" style={{ marginBottom: "var(--sp-3)" }}>
-            <span className="t-accent">03</span>
+            <span className="t-accent">04</span>
             <span style={{ margin: "0 0.75em", opacity: 0.4 }}>—</span>
             Áreas de práctica
           </p>

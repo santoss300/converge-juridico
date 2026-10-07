@@ -12,10 +12,10 @@ import { useEffect, useState } from "react";
 export const SECCIONES = [
   { id: "hero", folio: "01", label: "Inicio" },
   { id: "perfil", folio: "02", label: "Quién te atiende" },
-  { id: "areas", folio: "03", label: "Áreas" },
-  { id: "contacto", folio: "04", label: "Contacto" },
-  { id: "practicas", folio: "05", label: "Prácticas" },
-  { id: "ia", folio: "06", label: "En desarrollo" },
+  { id: "ia", folio: "03", label: "Converge IA" },
+  { id: "areas", folio: "04", label: "Áreas" },
+  { id: "contacto", folio: "05", label: "Contacto" },
+  { id: "practicas", folio: "06", label: "Prácticas" },
   { id: "footer", folio: "07", label: "Estudio" },
 ] as const;
 

@@ -19,10 +19,10 @@ export default function Home() {
       <main>
         <Hero />
         <Perfil />
+        <TeaserIA />
         <Areas />
         <Contacto />
         <Practicas />
-        <TeaserIA />
       </main>
       <Footer />
       <WhatsAppFloat />

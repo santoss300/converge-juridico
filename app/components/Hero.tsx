@@ -101,6 +101,13 @@ export default function Hero() {
             WhatsApp
           </a>
         </Reveal>
+
+        <Reveal i={7}>
+          <a href="#ia" className="t-label hero-ia">
+            <span className="t-accent">03</span>
+            Converge IA — la herramienta que usamos en el estudio →
+          </a>
+        </Reveal>
       </div>
     </section>
   );

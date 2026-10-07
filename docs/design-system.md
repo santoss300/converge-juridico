@@ -85,10 +85,10 @@ Un rail vertical fijo sobre el margen izquierdo con las secciones numeradas `01 
 |---|---|---|
 | 01 | Hero | Titular + **un** CTA legible sobre el fold |
 | 02 | Perfil | La foto y el nombre — activo de confianza principal de un estudio unipersonal |
-| 03 | Áreas (6) | Los 6 nombres tienen que ser **escaneables**: el usuario busca el suyo |
-| 04 | Contacto | El formulario funciona siempre |
-| 05 | Prácticas | Secundario, puede ceder protagonismo |
-| 06 | Teaser IA | Cierre, sin competir con el CTA principal |
+| 03 | Converge IA | Visible temprano (postulación a Claude Startups, 2026-10-07). Sin competir con el CTA principal: su acción es acceso anticipado por mail |
+| 04 | Áreas (6) | Los 6 nombres tienen que ser **escaneables**: el usuario busca el suyo |
+| 05 | Contacto | El formulario funciona siempre |
+| 06 | Prácticas | Secundario, puede ceder protagonismo |
 | 07 | Footer | — |
 | — | WhatsApp flotante | **Siempre visible**, en toda la página |
 
@@ -384,20 +384,30 @@ seguirlo y ver cómo se decide cada paso.
 [ Postularme ]
 ```
 
-### 06 · TEASER IA
+### 03 · CONVERGE IA (antes 06 · Teaser IA — subida el 2026-10-07)
 
 ```
-06 — EN DESARROLLO
+03 — CONVERGE IA
 
-Estamos construyendo una herramienta de IA
-para estudios jurídicos.
+La herramienta de IA que usamos en el estudio, todos los días.
 
-Búsqueda de antecedentes, lectura de documentación y borradores de
-escritos. No firma, no decide y no reemplaza al abogado: le saca de
-encima las horas que no requieren criterio.
+La construimos nosotros, sobre Claude. Busca en una biblioteca propia
+de códigos, doctrina y manuales, y responde con la cita exacta:
+artículo y página. Hoy la usamos en cada caso; pronto, en otros
+estudios jurídicos.
 
-[ Quiero acceso anticipado ]
+[maqueta: pregunta → respuesta → fuentes foliadas 1·2·3, "Ejemplo ilustrativo"]
+a Consultas con cita · b Análisis de expedientes · c Escritos en .docx · d En Tribunales
+
+No firma ni decide: el criterio y la firma son siempre del abogado.
+
+[ Quiero acceso anticipado ]  → mailto:contacto@convergejuridico.com
 ```
+
+> **Regla:** coherente con la solicitud a Claude Startups. Nada de "entrenado",
+> "el primero", ni métricas. Es RAG sobre biblioteca propia. Sin logos de
+> Anthropic/Claude: solo el texto "sobre Claude".
+> Puentes: línea `03 — Converge IA →` bajo los CTA del Hero, e ítem en el Navbar.
 
 ---
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Captcha from "./Captcha";
 import Reveal from "./Reveal";
 
-/* 04 — CONTACTO
+/* 05 — CONTACTO
    Estados de UI (Etapa 3): enviando · éxito · error del usuario ·
    error del sistema · rate limit. Ninguno termina en callejón:
    todos ofrecen WhatsApp como salida. */
@@ -68,7 +68,7 @@ export default function Contacto() {
       <div className="container">
         <Reveal i={0} style={{ marginBottom: "var(--sp-6)" }}>
           <p className="t-label">
-            <span className="t-accent">04</span>
+            <span className="t-accent">05</span>
             <span style={{ margin: "0 0.75em", opacity: 0.4 }}>—</span>
             Contacto
           </p>

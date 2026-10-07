@@ -51,6 +51,9 @@ export default function Navbar() {
             gap: "var(--sp-4)",
           }}
         >
+          <a href="#ia" className="t-label nav-link hide-mobile">
+            Converge IA
+          </a>
           <a href="#areas" className="t-label nav-link hide-mobile">
             Áreas
           </a>
