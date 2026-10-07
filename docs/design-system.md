@@ -333,9 +333,10 @@ cuánto cuesta y cuánto puede tardar. Nada más, y nada menos.
 Ignacio Facundo Ruíz
 Abogado · Matrícula ⚠️PENDIENTE · Salta
 
-Somos un estudio chico, y lo decimos de frente: tu expediente no es
-el número doscientos de una pila. Cuando mandás un mensaje te responde
-el abogado que lo lleva, no una secretaria que toma nota.
+Atendemos en Pasaje Aarón Castellanos 1676, Salta. Llevamos casos de
+familia —divorcios, alimentos y sucesiones— y civiles: deudas, pagarés
+y juicios ejecutivos. Cuando mandás un mensaje te responde el abogado
+que lleva tu expediente, no una secretaria que toma nota.
 
 Trabajamos con una regla: si no podés explicarle a otro en qué estado
 está tu juicio, no te lo explicamos bien.

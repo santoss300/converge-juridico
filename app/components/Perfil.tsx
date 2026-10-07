@@ -47,9 +47,10 @@ export default function Perfil() {
             <hr className="rule-accent" style={{ margin: "var(--sp-5) 0" }} />
 
             <p className="t-body" style={{ marginBottom: "var(--sp-4)" }}>
-              Somos un estudio chico, y lo decimos de frente: tu expediente no es
-              el número doscientos de una pila. Cuando mandás un mensaje te
-              responde el abogado que lo lleva, no una secretaria que toma nota.
+              Atendemos en Pasaje Aarón Castellanos 1676, Salta. Llevamos casos
+              de familia —divorcios, alimentos y sucesiones— y civiles: deudas,
+              pagarés y juicios ejecutivos. Cuando mandás un mensaje te responde
+              el abogado que lleva tu expediente, no una secretaria que toma nota.
             </p>
 
             <p className="t-body" style={{ marginBottom: "var(--sp-6)" }}>
